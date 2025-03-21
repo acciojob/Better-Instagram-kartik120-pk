@@ -1,25 +1,10 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-#parent {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
 .image {
-    height: 300px;
-    width: 200px;
+    height: 200px;
+    width: 150px;
     margin: 10px;
     background-size: cover;
     background-position: center;
     cursor: grab;
-    border: 3px solid #555;
 }
 
 #div1 { background-image: url("https://picsum.photos/id/237/200/300"); }
@@ -29,6 +14,13 @@ body {
 #div5 { background-image: url("https://picsum.photos/200/300.jpg"); }
 #div6 { background-image: url("https://picsum.photos/id/102/200/300"); }
 
-.image.dragging {
-    opacity: 0.5;
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.selected {
+    border: 3px solid rgb(0, 195, 255);
 }

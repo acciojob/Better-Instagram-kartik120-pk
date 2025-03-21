@@ -1,30 +1,30 @@
-//your code here
-document.addEventListener("DOMContentLoaded", () => {
-    const images = document.querySelectorAll(".image");
+const images = document.querySelectorAll(".image");
 
-    let draggedElement = null;
+let draggedItem = null;
 
-    images.forEach(image => {
-        image.addEventListener("dragstart", (e) => {
-            draggedElement = e.target;
-            e.target.classList.add("dragging");
-        });
+images.forEach((image) => {
+    image.addEventListener("dragstart", (event) => {
+        draggedItem = event.target;
+        event.dataTransfer.setData("text/html", draggedItem.outerHTML);
+        setTimeout(() => (draggedItem.style.display = "none"), 0);
+    });
 
-        image.addEventListener("dragend", (e) => {
-            e.target.classList.remove("dragging");
-        });
+    image.addEventListener("dragover", (event) => {
+        event.preventDefault();
+    });
 
-        image.addEventListener("dragover", (e) => {
-            e.preventDefault();
-        });
+    image.addEventListener("drop", (event) => {
+        event.preventDefault();
+        if (draggedItem !== event.target) {
+            let temp = draggedItem.style.backgroundImage;
+            draggedItem.style.backgroundImage = event.target.style.backgroundImage;
+            event.target.style.backgroundImage = temp;
+        }
+        draggedItem.style.display = "block";
+        draggedItem = null;
+    });
 
-        image.addEventListener("drop", (e) => {
-            e.preventDefault();
-            if (draggedElement && draggedElement !== e.target) {
-                let tempBackground = draggedElement.style.backgroundImage;
-                draggedElement.style.backgroundImage = e.target.style.backgroundImage;
-                e.target.style.backgroundImage = tempBackground;
-            }
-        });
+    image.addEventListener("dragend", () => {
+        if (draggedItem) draggedItem.style.display = "block";
     });
 });
